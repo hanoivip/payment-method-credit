@@ -53,7 +53,7 @@ class CreditFailure implements IPaymentResult
 
     public function getTransId()
     {
-        return $this->trans;
+        return $this->trans->trans_id;
     }
 
 
