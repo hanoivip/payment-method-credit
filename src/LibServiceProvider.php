@@ -19,7 +19,6 @@ class LibServiceProvider extends ServiceProvider
     public function register()
     {
         $this->commands([
-            \Hanoivip\PaymentMethodTsr\TestCallback::class,
         ]);
         $this->app->bind("CreditPaymentMethod", CreditMethod::class);
     }
