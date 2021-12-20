@@ -49,7 +49,7 @@ class CreditMethod implements IPaymentMethod
         return new CreditSuccess($trans, $amount);
     }
 
-    public function query($trans)
+    public function query($trans, $force = false)
     {}
 
     public function config($cfg)
