@@ -37,12 +37,13 @@ class CreditMethod implements IPaymentMethod
         $order = $trans->order;
         $orderDetail = IapFacade::detail($order);
         $amount = $orderDetail['item_price'];
-        if (!BalanceFacade::enough($uid, $amount, 0))
+        $currency = $orderDetail['item_currency'];
+        if (!BalanceFacade::enough($uid, $amount, 0, $currency))
         {
             Log::error("CreditMethod user not enough credit");
             return new CreditFailure($trans, __('hanoivip::credit.failure.not-enough'));
         }
-        if (!BalanceFacade::remove($uid, $amount, "CreditMethod", 0))
+        if (!BalanceFacade::remove($uid, $amount, "CreditMethod", 0, $currency))
         {
             return new CreditFailure($trans, __('hanoivip::credit.failure.fail-to-charge'));
         }
