@@ -29,7 +29,7 @@ class CreditSession implements IPaymentSession
 
     public function getGuide()
     {
-        return __('hanoivip::credit.guide');
+        return __('hanoivip.credit::credit.guide');
     }
 
     public function getData()

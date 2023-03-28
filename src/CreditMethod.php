@@ -24,7 +24,7 @@ class CreditMethod implements IPaymentMethod
         foreach ($balances as $bal)
         {
             $i = new \stdClass();
-            $i->type = __('hanoivip::credit.type.' . $bal->balance_type);
+            $i->type = __('hanoivip.credit::credit.type.' . $bal->balance_type);
             $i->balance = $bal->balance;
             $info[] = $i;
         }
@@ -41,11 +41,11 @@ class CreditMethod implements IPaymentMethod
         if (!BalanceFacade::enough($uid, $amount, 0, $currency))
         {
             Log::error("CreditMethod user not enough credit");
-            return new CreditFailure($trans, __('hanoivip::credit.failure.not-enough'));
+            return new CreditFailure($trans, __('hanoivip.credit::credit.failure.not-enough'));
         }
         if (!BalanceFacade::remove($uid, $amount, "CreditMethod", 0, $currency))
         {
-            return new CreditFailure($trans, __('hanoivip::credit.failure.fail-to-charge'));
+            return new CreditFailure($trans, __('hanoivip.credit::credit.failure.fail-to-charge'));
         }
         return new CreditSuccess($trans, $amount);
     }

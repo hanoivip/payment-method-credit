@@ -17,7 +17,7 @@ class CreditSuccess implements IPaymentResult
     
     public function getDetail()
     {
-        return __('hanoivip::credit.success', ['amount' => $this->amount]);
+        return __('hanoivip.credit::credit.success', ['amount' => $this->amount]);
     }
 
     public function isPending()
