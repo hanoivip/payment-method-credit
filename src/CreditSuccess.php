@@ -49,11 +49,18 @@ class CreditSuccess implements IPaymentResult
         $arr['isFailure'] = $this->isFailure();
         $arr['isSuccess'] = $this->isSuccess();
         $arr['trans'] = $this->getTransId();
+        $arr['currency'] = $this->getCurrency();
         return $arr;
     }
     
     public function getTransId()
     {
         return $this->trans->trans_id;
-    }    
+    }
+    
+    public function getCurrency()
+    {
+        return 'webcoin';
+    }
+    
 }
