@@ -7,12 +7,14 @@ use Hanoivip\PaymentMethodContract\IPaymentResult;
 class CreditSuccess implements IPaymentResult
 {
     private $amount;
+    private $currency;
     private $trans;
     
-    public function __construct($trans, $amount)
+    public function __construct($trans, $amount, $currency)
     {
         $this->trans = $trans;
-        $this->amount = $amount;    
+        $this->amount = $amount;
+        $this->currency = $currency;
     }
     
     public function getDetail()
@@ -60,7 +62,7 @@ class CreditSuccess implements IPaymentResult
     
     public function getCurrency()
     {
-        return 'webcoin';
+        return $this->currency;
     }
     
 }

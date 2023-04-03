@@ -47,7 +47,7 @@ class CreditMethod implements IPaymentMethod
         {
             return new CreditFailure($trans, __('hanoivip.credit::credit.failure.fail-to-charge'));
         }
-        return new CreditSuccess($trans, $amount);
+        return new CreditSuccess($trans, $amount, $currency);
     }
 
     public function query($trans, $force = false)
