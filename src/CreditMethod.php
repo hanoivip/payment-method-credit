@@ -55,6 +55,12 @@ class CreditMethod implements IPaymentMethod
 
     public function config($cfg)
     {}
+    
+    public function validate($params)
+    {
+        return true;
+    }
+
 
     
 }
