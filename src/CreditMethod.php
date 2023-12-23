@@ -6,7 +6,9 @@ use Hanoivip\PaymentMethodContract\IPaymentMethod;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Hanoivip\Payment\Facades\BalanceFacade;
-use Hanoivip\IapContract\Facades\IapFacade;
+//use Hanoivip\IapContract\Facades\IapFacade;
+use Hanoivip\Shop\Facades\OrderFacade;
+use Exception;
 
 class CreditMethod implements IPaymentMethod
 {
@@ -35,9 +37,14 @@ class CreditMethod implements IPaymentMethod
     {
         $uid = Auth::user()->getAuthIdentifier();
         $order = $trans->order;
+        /*
         $orderDetail = IapFacade::detail($order);
         $amount = $orderDetail['item_price'];
         $currency = $orderDetail['item_currency'];
+        */
+        $orderDetail = OrderFacade::detail($order);
+        $amount = $orderDetail->price;
+        $currency = $orderDetail->currency;
         if (!BalanceFacade::enough($uid, $amount, 0, $currency))
         {
             Log::error("CreditMethod user not enough credit");
@@ -60,7 +67,9 @@ class CreditMethod implements IPaymentMethod
     {
         return true;
     }
-
-
     
+    public function openPendingPage($trans)
+    {
+        throw new Exception("Pay with credit is never pending.");
+    }    
 }
