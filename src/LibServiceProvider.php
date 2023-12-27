@@ -14,7 +14,7 @@ class LibServiceProvider extends ServiceProvider
         ]);
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadTranslationsFrom( __DIR__.'/../lang', 'hanoivip.credit');
-        $this->loadViewsFrom(__DIR__ . '/../views', 'hanoivip');
+        $this->loadViewsFrom(__DIR__ . '/../views', 'hanoivip.credit');
     }
     
     public function register()

@@ -71,5 +71,11 @@ class CreditMethod implements IPaymentMethod
     public function openPendingPage($trans)
     {
         throw new Exception("Pay with credit is never pending.");
-    }    
+    }
+    
+    public function openPaymentPage($transId, $guide, $session)
+    {
+        return view('hanoivip.credit::payment', ['trans' => $transId, 'guide' => $guide, 'data' => $session]);
+    }
+    
 }
