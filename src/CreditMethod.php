@@ -3,7 +3,6 @@
 namespace Hanoivip\PaymentMethodCredit;
 
 use Hanoivip\PaymentMethodContract\IPaymentMethod;
-//use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Hanoivip\Payment\Facades\BalanceFacade;
 use Hanoivip\Shop\Facades\OrderFacade;
@@ -19,10 +18,9 @@ class CreditMethod implements IPaymentMethod
 
     public function beginTrans($trans)
     {
-        //$uid = Auth::user()->getAuthIdentifier();
         $order = $trans->order;
         $orderDetail = OrderFacade::detail($order);
-        $uid = $orderDetail->userId;
+        $uid = $orderDetail->user_id;
         $balances = BalanceFacade::getInfo($uid);
         $info = [];
         foreach ($balances as $bal)
@@ -37,10 +35,9 @@ class CreditMethod implements IPaymentMethod
 
     public function request($trans, $params)
     {
-        //$uid = Auth::user()->getAuthIdentifier();
         $order = $trans->order;
         $orderDetail = OrderFacade::detail($order);
-        $uid = $orderDetail->userId;
+        $uid = $orderDetail->user_id;
         $amount = $orderDetail->price;
         $currency = $orderDetail->currency;
         if (!BalanceFacade::enough($uid, $amount, 0, $currency))
